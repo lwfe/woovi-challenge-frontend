@@ -7,6 +7,7 @@ import { CheckCircle } from "lucide-react";
 import { demoData } from "@/lib/data";
 
 import { Footer } from "@/components/footer";
+import { Helper } from "./components/helper";
 import { Copy } from "@/components/icons/copy";
 import { Button } from "@/components/ui/button";
 import { WooviLogo } from "@/components/icons/woovi";
@@ -31,6 +32,7 @@ export default function Payment({ params }: { params: { id: string } }) {
 
   return (
     <main className="flex flex-col items-center min-h-full w-full p-6">
+      <Helper />
       <WooviLogo />
 
       <h1 className="mt-10 text-2xl text-center text-foreground font-extrabold">
