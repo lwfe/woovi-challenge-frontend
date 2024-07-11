@@ -88,10 +88,8 @@ interface CheckboxCardBannerProps {
 }
 export function CheckboxCardBanner({ children }: CheckboxCardBannerProps) {
   return (
-    <div className="w-full mt-1 overflow-hidden">
-      <div className="pr-12 w-full p-1 bg-secondary overflow-hidden text-white rounded-l-lg">
-        {children}
-      </div>
+    <div className="mt-1 pr-12 w-full p-1 bg-secondary overflow-hidden text-white rounded-lg">
+      {children}
     </div>
   );
 }
