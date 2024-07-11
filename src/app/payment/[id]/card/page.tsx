@@ -1,13 +1,7 @@
 "use client";
-
-import Image from "next/image";
-import { useEffect } from "react";
-
 import { demoData } from "@/lib/data";
 
 import { Footer } from "@/components/footer";
-import { Copy } from "@/components/icons/copy";
-import { Button } from "@/components/ui/button";
 import { WooviLogo } from "@/components/icons/woovi";
 import {
   Accordion,
@@ -16,6 +10,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { PaymentSteps } from "./components/payment-steps";
+import { PaymentForm } from "./components/form";
 
 export default function Payment({ params }: { params: { id: string } }) {
   const data = demoData[parseInt(params.id) - 1];
@@ -25,30 +20,19 @@ export default function Payment({ params }: { params: { id: string } }) {
     new Date().setHours(new Date().getHours() + 4)
   ).toLocaleTimeString();
 
-  useEffect(() => {
-    setTimeout(() => {
-      console.log("teste");
-    }, 1500);
-  }, []);
-
   return (
     <main className="flex flex-col items-center min-h-full w-full p-6">
       <WooviLogo />
 
       <h1 className="mt-10 text-2xl text-center text-foreground font-extrabold">
-        {data.installments === 1 &&
-          `João, faça o pagamento de ${data.totalAmount} no Pix`}
-        {data.installments !== 1 &&
-          `João, pague a entrada de ${data.value} pelo Pix`}
+        João, pague o restante em{" "}
+        {data.installments_options.length === 1
+          ? "1x"
+          : `até ${data.installments_options.length}x`}{" "}
+        no cartão
       </h1>
 
-      <div className="border-2 rounded-md border-success p-2 mt-5">
-        <Image src="/qrcode.png" alt="qrcode" width={250} height={250} />
-      </div>
-
-      <Button variant={"secondary"} size={"sm"} className="px-6 mt-5">
-        Clique para copiar QR CODE <Copy className="ml-2" />
-      </Button>
+      <PaymentForm data={data} />
 
       <div className="flex flex-col items-center font-semibold mt-5">
         <p className="text-muted">Prazo de pagamento:</p>
