@@ -19,21 +19,21 @@ export function PaymentSteps({
       </li>
 
       {Array.from({ length: installments - 1 }).map((_, index) => (
-        <>
+        <div key={index}>
           <div
             className={cn(
               "w-[2px] h-[25px] -mb-[5px] -mt-[5px] ml-[7px] bg-border",
               index === 0 && "-mt-[10px]"
             )}
           ></div>
-          <li key={index} className="flex items-center justify-between">
+          <li className="flex items-center justify-between">
             <p className="font-semibold">
               <Checkbox className="w-4 h-4 mr-2 border-success" disabled />
               {index + 2}ª no cartão
             </p>
             <span className="font-extrabold">{value}</span>
           </li>
-        </>
+        </div>
       ))}
     </ul>
   );

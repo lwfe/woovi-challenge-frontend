@@ -1,7 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect } from "react";
+import { useState } from "react";
+import { CheckCircle } from "lucide-react";
 
 import { demoData } from "@/lib/data";
 
@@ -20,6 +21,13 @@ import { ExpirationDate } from "@/components/expiration-date";
 
 export default function Payment({ params }: { params: { id: string } }) {
   const data = demoData[parseInt(params.id) - 1];
+  const [copied, setCopied] = useState(false);
+
+  function handleCopy() {
+    navigator.clipboard.writeText("woovi-frontend-challenge-qrcode");
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  }
 
   return (
     <main className="flex flex-col items-center min-h-full w-full p-6">
@@ -36,8 +44,22 @@ export default function Payment({ params }: { params: { id: string } }) {
         <Image src="/qrcode.png" alt="qrcode" width={250} height={250} />
       </div>
 
-      <Button variant={"secondary"} size={"sm"} className="px-6 mt-5">
-        Clique para copiar QR CODE <Copy className="ml-2" />
+      <Button
+        variant={"secondary"}
+        size={"sm"}
+        className="px-6 mt-5 "
+        onClick={handleCopy}
+      >
+        {!copied && (
+          <>
+            Clique para copiar QR CODE <Copy className="ml-2" />
+          </>
+        )}
+        {copied && (
+          <>
+            Copiado <CheckCircle size={16} className="ml-2" />
+          </>
+        )}
       </Button>
 
       <ExpirationDate />
