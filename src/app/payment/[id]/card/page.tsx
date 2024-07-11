@@ -11,14 +11,10 @@ import {
 } from "@/components/ui/accordion";
 import { PaymentSteps } from "./components/payment-steps";
 import { PaymentForm } from "./components/form";
+import { ExpirationDate } from "@/components/expiration-date";
 
 export default function Payment({ params }: { params: { id: string } }) {
   const data = demoData[parseInt(params.id) - 1];
-
-  const date = new Date().toLocaleDateString();
-  const hourPlus4 = new Date(
-    new Date().setHours(new Date().getHours() + 4)
-  ).toLocaleTimeString();
 
   return (
     <main className="flex flex-col items-center min-h-full w-full p-6">
@@ -34,12 +30,7 @@ export default function Payment({ params }: { params: { id: string } }) {
 
       <PaymentForm data={data} />
 
-      <div className="flex flex-col items-center font-semibold mt-5">
-        <p className="text-muted">Prazo de pagamento:</p>
-        <span className="font-bold text-foreground">
-          {date} - {hourPlus4}
-        </span>
-      </div>
+      <ExpirationDate />
 
       <div className="w-full max-w-md divide-y-2">
         <PaymentSteps installments={data.installments} value={data.value} />
